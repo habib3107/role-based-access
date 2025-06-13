@@ -7,6 +7,7 @@ from typing import List
 from routers.Oauth_security import get_current_user
 from schemas import UserRole
 from model import User
+from routers.role_checker import allow_roles
 
 
 router=APIRouter(
@@ -21,7 +22,7 @@ def create_student(
     password : str = Form(...),
     role: UserRole = Form(...),
     db: Session=Depends(get_db),
-    current_get:User = Depends(get_current_user)
+    current_get:User = Depends(allow_roles(UserRole.admin))
 ):
     student_data=Student_create(name=name,email=email,password=password,role=role)
 
