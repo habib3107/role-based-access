@@ -1,4 +1,4 @@
-from sqlalchemy import Column ,Integer,String,DateTime,func
+from sqlalchemy import Column ,String,DateTime,func
 from database import Base
 from schemas import UserRole
 from sqlalchemy import Enum as SqlEnum

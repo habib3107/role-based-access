@@ -31,7 +31,7 @@ def create_student(
 @router.get('/',response_model=List[Student_out])
 def get_student(
     db : Session=Depends(get_db),
-    current_get:User = Depends(get_current_user)
+    current_get:User = Depends(allow_roles(UserRole.admin,UserRole.student))
 ):
     return rep_student.get_student(db)
 
@@ -39,6 +39,6 @@ def get_student(
 def get_one(
     student_id : str,
     db :Session=Depends(get_db),
-    current_get:User = Depends(get_current_user)
+    current_get:User = Depends(allow_roles(UserRole.admin,UserRole.student))
 ):
     return rep_student.get_one_student(student_id,db)
